@@ -2,6 +2,7 @@
 // useState 用于在函数组件中管理状态
 import React from 'react';
 import CommonAside   from "../components/commonAside";
+import CommonHeader   from "../components/commonHeader";
 // 导入 React Router 的 Outlet 组件
 // Outlet 用于渲染子路由的内容
 import {Outlet} from 'react-router-dom';
@@ -87,21 +88,7 @@ const Main = () => {
             {/* 右侧主内容区域 */}
             <Layout>
                 {/* 顶部头部区域 */}
-                <Header style={{padding: 0, background: colorBgContainer}}>
-                    {/* 折叠/展开按钮 */}
-                    <Button
-                        style={{
-                            fontSize: '16px',       // 图标大小
-                            width: 64,              // 按钮宽度
-                            height: 64,             // 按钮高度
-                            position: 'absolute',   // 绝对定位
-                            top: 0,                 // 顶部对齐
-                            zIndex: 1,              // 层级
-                            background: colorBgContainer,  // 背景色
-                            border: '1px solid #d9d9d9',  // 边框
-                        }}
-                    />
-                </Header>
+            <CommonHeader/>
                 
                 {/* 主内容区域 */}
                 <Content style={{margin: '0 16px'}}>
