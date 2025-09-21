@@ -1,8 +1,8 @@
 // 导入 React 核心库和 useState Hook
 // useState 用于在函数组件中管理状态
 import React from 'react';
-import CommonAside   from "../components/commonAside";
-import CommonHeader   from "../components/commonHeader";
+import CommonAside from "../components/commonAside";
+import CommonHeader from "../components/commonHeader";
 // 导入 React Router 的 Outlet 组件
 // Outlet 用于渲染子路由的内容
 import {Outlet} from 'react-router-dom';
@@ -21,47 +21,13 @@ import {
 
 // 导入 Ant Design 组件
 import {Breadcrumb, Button, Layout, Menu, theme} from 'antd';
+import {useSelector} from 'react-redux'
+
 
 // 从 Layout 组件中解构出子组件
 // 这样可以更方便地使用 Header、Content、Footer、Sider 等布局组件
 const {Header, Content, Footer, Sider} = Layout;
 
-// 菜单项配置数组
-// 定义了侧边栏菜单的所有选项
-const items = [
-    {
-        key: '1',                           // 菜单项的唯一标识
-        icon: <PieChartOutlined />,         // 菜单项图标
-        label: 'Option 1',                  // 菜单项显示文字
-    },
-    {
-        key: '2',
-        icon: <DesktopOutlined />,
-        label: 'Option 2',
-    },
-    {
-        key: '3',
-        icon: <UserOutlined />,
-        label: 'User',
-        children: [                         // 子菜单项
-            {
-                key: '3-1',
-                icon: <TeamOutlined />,
-                label: 'Tom',
-            },
-            {
-                key: '3-2',
-                icon: <TeamOutlined />,
-                label: 'Bill',
-            },
-        ],
-    },
-    {
-        key: '4',
-        icon: <FileOutlined />,
-        label: 'Files',
-    },
-];
 
 // Main 组件 - 主页面容器组件
 // 这是一个函数组件，使用箭头函数语法
@@ -77,27 +43,28 @@ const Main = () => {
     const {
         token: {colorBgContainer, borderRadiusLG},
     } = theme.useToken();
-
+    //获取展开收起的状态
+    const collapsed = useSelector(state => state.tab.isCollapsed)
     // 返回 JSX 结构
     return (
         // 最外层布局容器，设置最小高度为 100vh（视口高度）
         <Layout style={{minHeight: '100vh'}}>
             {/* 侧边栏组件 */}
-            <CommonAside />
-            
+            <CommonAside colloapsed={collapsed}/>
+
             {/* 右侧主内容区域 */}
             <Layout>
                 {/* 顶部头部区域 */}
-            <CommonHeader/>
-                
+                <CommonHeader colloapsed={collapsed}/>
+
                 {/* 主内容区域 */}
                 <Content style={{margin: '0 16px'}}>
                     {/* 面包屑导航 */}
-                    <Breadcrumb 
-                        style={{margin: '16px 0'}} 
+                    <Breadcrumb
+                        style={{margin: '16px 0'}}
                         items={[{title: 'User'}, {title: 'Bill'}]}  // 面包屑路径
                     />
-                    
+
                     {/* 内容容器 */}
                     <div
                         style={{
@@ -111,7 +78,7 @@ const Main = () => {
                         Bill is a cat.
                     </div>
                 </Content>
-                
+
                 {/* 底部区域 */}
                 <Footer style={{textAlign: 'center'}}>
                     {/* 版权信息，动态显示当前年份 */}

@@ -8,12 +8,15 @@ import {MenuUnfoldOutlined} from "@ant-design/icons";
 const {Header} = Layout;
 
 // CommonHeader 组件
-const CommonHeader = () => {
+const CommonHeader = ({collapsed}) => {
     // 使用 Ant Design 的主题系统获取颜色和样式变量
     const {
         token: {colorBgContainer},
     } = theme.useToken();
-
+    //点击展开收起的按钮
+    const setCollapsed = () => {
+        console.log(collapsed)
+    };
     return (
         <Header style={{padding: 0, background: colorBgContainer}}>
             {/* 折叠/展开按钮 */}
@@ -30,7 +33,7 @@ const CommonHeader = () => {
                     background: colorBgContainer,  // 背景色
                     border: '1px solid #d9d9d9',  // 边框
                 }}
-                onClick={}
+                onClick={()=>setCollapsed()}
             />
         </Header>
     );
